@@ -1,61 +1,67 @@
-package game.datastructure.structure;
+package game.datastructure;
 
-/**
- * 堆栈
- * 1)LIFO 先进后出表
- * 2)实现压栈push(),弹出pop()
- * 3)需要检查堆栈是否为空
- * 4)需要检查堆栈是否为满
- * 5)访问栈顶数据
- * @author pc
- *
- */
+import java.util.Scanner;
+
 public class Stack {
-	private int[] a;
-	private int MAX;
+	
+	private int size;
 	private int top;
+	private char[] array;
 	
-	public Stack(int size){
-		this.MAX = size;
-		a = new int[MAX];
-		top = -1;
+	public Stack(int size) {
+		this.size = size;
+		this.array = new char[size];
+		this.top = -1;
 	}
 	
-	public boolean isEmpty(){
-		return (top == -1);
-	}
-	
-	public boolean isFull(){
-		return (top == (this.MAX - 1));
-	}
-	
-	public void push(int value){	
-		if(top < MAX - 1){
-			a[++top] = value;
-		}else{
-			System.out.println("is full");
+	public void push(char t) {
+		if(!isFull()) {
+			array[++top] = t;
+			System.out.println("Ԫ��" + t + "��ջ");
+		}else {
+			System.out.println("��ǰջ��");
 		}
 	}
 	
-	public int pop(){
-		return a[top--];
-	}
-	
-	
-	public static void main(String[] args) {
-		Stack stack = new Stack(5);
-		System.out.println("length" + stack.MAX);
-		stack.push(6);
-		stack.push(5);
-		stack.push(4);
-		stack.push(3);
-		stack.push(2);
-		stack.push(1);
-		System.out.println("当前栈顶元素" + stack.pop());
-		while(!stack.isEmpty()){
-			System.out.println(stack.pop());
+	public void pop() {
+		if(isEmpty()) {
+			System.out.println("��ǰջΪ��");
+		}else{
+			System.out.println("ջ������" + array[top] + " ");
+			top--;
 		}
 		
 	}
+	
+	public char getTop() {
+		return array[top];
+	}
+	
+	public boolean isFull() {
+		if(top != size - 1) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
+	public boolean isEmpty() {
+		if(top == -1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	/*
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		Stack my = new Stack(5);
+		String s = scan.next();
+		my.push(s);
+		my.pop();
+		scan.close();
+		
+
+	}*/
 
 }
